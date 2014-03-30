@@ -80,7 +80,11 @@ module Merit
     end
 
     def category
-      @rule.category
+      if @rule.category.respond_to?(:call)
+        @rule.category.call(rule_object)
+      else
+        @rule.category
+      end
     end
 
     def sashes
